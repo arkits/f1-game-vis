@@ -22,9 +22,13 @@ def test_connect():
 
     global telemetry_emitter_thread
     with telemetry_emitter_thread_lock:
+
         if telemetry_emitter_thread is None:
-            emit("aux_event", {"message": "Starting Telemetry Emitter!"})
+            emit("aux_event", {"message": "Starting Telemetry Emitter 🏁"})
             telemetry_emitter_thread = sio_app.start_background_task(telemetry_emitter)
+
+        else:
+            emit("aux_event", {"message": "Telemetry Emitter is already running 🚗"})
 
 
 @sio_app.on("disconnect")
