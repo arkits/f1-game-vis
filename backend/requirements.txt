@@ -3,6 +3,7 @@ black==20.8b1
 click==7.1.2
 dnspython==1.16.0
 eventlet==0.29.1
+f1-2020-telemetry==0.2.1
 Flask==1.1.2
 Flask-SocketIO==4.3.1
 greenlet==0.4.17
@@ -16,6 +17,7 @@ pathspec==0.8.0
 python-dotenv==0.14.0
 python-engineio==3.13.2
 python-socketio==4.6.0
+PyYAML==5.3.1
 regex==2020.10.23
 six==1.15.0
 toml==0.10.1
