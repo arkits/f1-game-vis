@@ -16,9 +16,3 @@ source .venv/bin/activate
 ```
 pip install -r requirements.txt     
 ```
-
-- For the best performance, run the server using gunicorn
-
-```bash
-gunicorn --worker-class eventlet -w 1 src.server:flask_app
-```

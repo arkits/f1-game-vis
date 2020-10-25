@@ -1,13 +1,13 @@
-from src.server import sio_app
-from flask_socketio import emit
+import eventlet
+from app.domain.packet_emitter import telemetry_emitter
 from flask import request
+from flask_socketio import emit
 from loguru import logger
-from src.domain.packet_emitter import telemetry_emitter
-
-from threading import Lock
+from .. import sio_app
+import threading
 
 telemetry_emitter_thread = None
-telemetry_emitter_thread_lock = Lock()
+telemetry_emitter_thread_lock = threading.Lock()
 
 
 @sio_app.on("test_ping")
@@ -24,8 +24,15 @@ def test_connect():
     with telemetry_emitter_thread_lock:
 
         if telemetry_emitter_thread is None:
-            emit("aux_event", {"message": "Starting Telemetry Emitter 🏁"})
-            telemetry_emitter_thread = sio_app.start_background_task(telemetry_emitter)
+
+            emit(
+                "aux_event",
+                {
+                    "message": "Starting Telemetry Emitter 🏁",
+                },
+            )
+
+            telemetry_emitter_thread = eventlet.spawn(telemetry_emitter)
 
         else:
             emit("aux_event", {"message": "Telemetry Emitter is already running 🚗"})
