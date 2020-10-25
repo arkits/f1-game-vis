@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-      <meta name="viewport" content="width=device-width" />
-      <link rel="icon" href="path/to/fav.png">
-      <title>f1-game-vis</title>
-      <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
-      <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
-      <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-         crossorigin="anonymous"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
-         integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-      <script type="text/javascript" src="{{ url_for('static', filename='vis.js') }}"></script>
-   </head>
-   <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true"
-      data-set-preferred-mode-onload="true">
-      <div class="page-wrapper with-navbar">
-         <div class="sticky-alerts"></div>
-         <nav class="navbar">
-            <a href="#" class="navbar-brand">
-            F1 Game Viz
-            </a>
-         </nav>
-         <div class="content-wrapper">
-            <div class="container-fluid">
-               <!-- First row -->
-               <div class="row">
-                  <div class="col-4">
-                     <div class="card">
-                        <p>Async mode is: <b>{{ async_mode }}</b></p>
-                     </div>
+
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+   <meta name="viewport" content="width=device-width" />
+   <link rel="icon" href="path/to/fav.png">
+   <title>f1-game-vis</title>
+   <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
+   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+   <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+      integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='vis.js') }}"></script>
+</head>
+
+<body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true"
+   data-set-preferred-mode-onload="true">
+   <div class="page-wrapper with-navbar">
+      <div class="sticky-alerts"></div>
+      <nav class="navbar">
+         <a href="#" class="navbar-brand">
+            Viz
+         </a>
+         <div class="d-none d-md-flex ml-auto">
+            <span class="navbar-text ml-5">
+               <a href="#" class="badge-group" role="group" aria-label="...">
+                  <span class="badge bg-dark text-white">async_mode</span>
+                  <span class="badge badge-primary">{{ async_mode }}</span>
+               </a>
+               <a href="#" class="badge-group" role="group" aria-label="...">
+                  <span class="badge bg-dark text-white">ping/pong</span>
+                  <span class="badge badge-success">
+                     <span id="ping-pong"></span>ms
+                  </span>
+               </a>
+            </span>
+         </div>
+      </nav>
+      <div class="content-wrapper">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-4">
+                  <div class="card">
+                     <center>
+                        <span class="align-middle" id="speed"></span>
+                        <p>Speed</p>
+                     </center>
                   </div>
-                  <div class="col-4">
-                     <div class="card">
-                        <p>Average ping/pong latency: <b><span id="ping-pong"></span>ms</b></p>
-                     </div>
-                  </div>
-                  <div class="col-4">
-                     <div class="card">
-                        <p>Speed: <b><span id="speed"></span>kmph</b></p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="card h-half">
-               <h2 class="card-title">
-                  Logs
-               </h2>
-               <div class="h-full" id="logs">
                </div>
             </div>
          </div>
+         <div class="card h-half">
+            <h2 class="card-title">
+               Logs
+            </h2>
+            <div class="h-full" id="logs">
+            </div>
+         </div>
       </div>
-      <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
-   </body>
+   </div>
+   <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+
 </html>
