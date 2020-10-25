@@ -47,8 +47,40 @@
                <div class="col-4">
                   <div class="card">
                      <center>
-                        <span class="align-middle" id="speed"></span>
-                        <p>Speed</p>
+                        <div class="container-fluid">
+                           <div class="row">
+                              <div class="col-sm">
+                                 <span class="align-middle stat" id="speed"></span>
+                                 <p>Speed</p>
+                              </div>
+                              <div class="col-sm">
+                                 <span class="align-middle stat" id="engineRPM"></span>
+                                 <p>RPM</p>
+                              </div>
+                              <div class="col-sm">
+                                 <span class="align-middle stat" id="gear"></span>
+                                 <p>Gear</p>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="progress-group">
+                                 <div class="progress">
+                                    <div class="progress-bar" role="progressbar" id="revLightsPercent" aria-valuemin="0"
+                                       aria-valuemax="100">
+                                    </div>
+                                 </div>
+                                 <span class="progress-group-label">REV</span>
+                              </div>
+                           </div>
+                        </div>
+                     </center>
+                  </div>
+               </div>
+               <div class="col-4">
+                  <div class="card">
+                     <center>
+                        <div class="container-fluid">
+
                      </center>
                   </div>
                </div>
@@ -58,7 +90,7 @@
             <h2 class="card-title">
                Logs
             </h2>
-            <div class="h-full" id="logs">
+            <div class="h-full text-monospace" id="logs">
             </div>
          </div>
       </div>

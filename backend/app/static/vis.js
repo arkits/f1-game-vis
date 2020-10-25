@@ -1,6 +1,8 @@
 $(document).ready(function () {
   namespace = "";
 
+  show_logs = false;
+
   var socket = io(namespace);
 
   socket.on("aux_event", function (msg, cb) {
@@ -14,15 +16,30 @@ $(document).ready(function () {
   });
 
   socket.on("telemetry", function (msg, cb) {
-    $("#logs").prepend(
-      "<br>" +
-        $("<div/>")
-          .text("telemetry >> " + JSON.stringify(msg))
-          .html()
-    );
+    if (show_logs) {
+      $("#logs").prepend(
+        "<br>" +
+          $("<div/>")
+            .text("telemetry >> " + JSON.stringify(msg))
+            .html()
+      );
+    }
 
     if ("speed" in msg) {
       $("#speed").text(msg.speed);
+    }
+
+    if ("engineRPM" in msg) {
+      $("#engineRPM").text(msg.engineRPM);
+    }
+
+    if ("gear" in msg) {
+      $("#gear").text(msg.gear);
+    }
+
+    if ("revLightsPercent" in msg) {
+      var value = msg.revLightsPercent + "%";
+      $("#revLightsPercent").css("width", value);
     }
 
     if (cb) cb();
