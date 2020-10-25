@@ -1,6 +1,8 @@
 import socket
+import eventlet
 from loguru import logger
 from f1_2020_telemetry import packets as f1_packets
+
 from .. import sio_app
 
 
@@ -19,17 +21,20 @@ def telemetry_emitter():
         # Parse the packet
         unpacked_packet = f1_packets.unpack_udp_packet(udp_packet)
 
-        if type(unpacked_packet) is f1_packets.PacketCarTelemetryData_V1:
+        eventlet.spawn(parse_and_emit, unpacked_packet)
 
-            car_telemetry = parse_car_telemetry_data(
-                unpacked_packet.carTelemetryData[0]
-            )
 
-            # Emit it!
-            sio_app.emit(
-                "telemetry",
-                car_telemetry,
-            )
+def parse_and_emit(unpacked_packet):
+
+    if type(unpacked_packet) is f1_packets.PacketCarTelemetryData_V1:
+
+        car_telemetry = parse_car_telemetry_data(unpacked_packet.carTelemetryData[0])
+
+        # Emit it!
+        sio_app.emit(
+            "telemetry",
+            car_telemetry,
+        )
 
 
 def parse_car_telemetry_data(data: f1_packets.CarTelemetryData_V1):
