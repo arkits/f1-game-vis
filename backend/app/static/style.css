@@ -7,3 +7,9 @@
   font-weight: 700;
   font-size: 54px;
 }
+
+#motion-map {
+  background-color: white;
+  height: 600px;
+  width: 800px;
+}
