@@ -26,28 +26,57 @@ def telemetry_emitter():
 
 def parse_and_emit(unpacked_packet):
 
+    parsed_packet, packet_type = parse_packet(unpacked_packet)
+
+    if packet_type is None:
+        # The packet was one we didn't care about
+        return
+
+    # Emit it!
+    sio_app.emit(
+        packet_type,
+        parsed_packet,
+    )
+
+    logger.debug("Emitted type={} packet={}", packet_type, parsed_packet)
+
+
+def parse_packet(unpacked_packet):
+
+    player_car_idx = unpacked_packet.header.playerCarIndex
+
+    # Handle player_car_telemetry
     if type(unpacked_packet) is f1_packets.PacketCarTelemetryData_V1:
 
-        car_telemetry = parse_car_telemetry_data(unpacked_packet.carTelemetryData[0])
-
-        # Emit it!
-        sio_app.emit(
-            "telemetry",
-            car_telemetry,
+        player_car_telemetry = parse_packet_to_dict(
+            unpacked_packet.carTelemetryData[player_car_idx]
         )
 
+        return player_car_telemetry, "player_car_telemetry"
 
-def parse_car_telemetry_data(data: f1_packets.CarTelemetryData_V1):
+    # Handle car_motion_data
+    if type(unpacked_packet) is f1_packets.PacketMotionData_V1:
 
-    car_telemetry = {}
+        car_motion_data = parse_packet_to_dict(
+            unpacked_packet.carMotionData[player_car_idx]
+        )
+
+        return car_motion_data, "car_motion_data"
+
+    return None, None
+
+
+def parse_packet_to_dict(packet: f1_packets.PackedLittleEndianStructure):
+
+    parsed_packet = {}
 
     # Iterate through all the fields
-    for field_name in f1_packets.CarTelemetryData_V1._fields_:
+    for field in packet._fields_:
 
-        field_name_str = field_name[0]
+        field_name_str = field[0]
 
         # Get the value for the field
-        field_value = getattr(data, field_name_str)
+        field_value = getattr(packet, field_name_str)
 
         # If the value is an Array...
         if isinstance(field_value, f1_packets.ctypes.Array):
@@ -59,6 +88,6 @@ def parse_car_telemetry_data(data: f1_packets.CarTelemetryData_V1):
 
             field_value = all_values
 
-        car_telemetry[field_name_str] = field_value
+        parsed_packet[field_name_str] = field_value
 
-    return car_telemetry
+    return parsed_packet
