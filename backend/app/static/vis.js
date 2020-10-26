@@ -95,12 +95,12 @@ function draw_motion_chart() {
       return d.worldPositionX;
     })
   );
-  y.domain([
-    0,
-    d3.max(motion_data, function (d) {
+
+  y.domain(
+    d3.extent(motion_data, function (d) {
       return d.worldPositionY;
-    }),
-  ]);
+    })
+  );
 
   // define the line
   var valueline = d3
