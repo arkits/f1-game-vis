@@ -1,4 +1,5 @@
 let motion_data = [];
+let motion_map_viewport_size = 600;
 
 $(document).ready(function () {
   // Setup Socket IO
@@ -78,44 +79,26 @@ function draw_motion_chart() {
   var margin = {
     top: 20,
     right: 20,
-    bottom: 30,
+    bottom: 20,
     left: 40,
   };
 
   var width = 700;
-  var height = 500;
+  var height = 700;
 
   // set the ranges
-  var x = d3.scaleLinear().range([0, width]);
-  var y = d3.scaleLinear().range([height, 0]);
-
-  // Scale the range of the data
-  x.domain(
-    d3.extent(motion_data, function (d) {
-      return d.worldPositionX;
-    })
-  );
-
-  y.domain(
-    d3.extent(motion_data, function (d) {
-      return d.worldPositionY;
-    })
-  );
-
-  // define the line
-  var valueline = d3
-    .line()
-    .x(function (d) {
-      return x(d.worldPositionX);
-    })
-    .y(function (d) {
-      return y(d.worldPositionY);
-    });
+  var x = d3
+    .scaleLinear()
+    .domain([-motion_map_viewport_size, motion_map_viewport_size])
+    .range([0, width]);
+  var y = d3
+    .scaleLinear()
+    .domain([-motion_map_viewport_size, motion_map_viewport_size])
+    .range([height, 0]);
 
   d3.select("#motion-map").remove();
   d3.select("#motion-map-container").append("svg").attr("id", "motion-map");
 
-  // append the svg object to the body of the page
   var svg = d3
     .select("#motion-map")
     .append("svg")
@@ -124,24 +107,21 @@ function draw_motion_chart() {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  // Add the trendline
   svg
     .append("path")
-    .data([motion_data])
-    .attr("class", "line")
-    .attr("d", valueline)
-    .attr("stroke", "#32CD32")
-    .attr("stroke-width", 2)
-    .attr("fill", "#FFFFFF");
-
-  svg
-    .append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
-
-  svg.append("g").call(
-    d3.axisLeft(y).tickFormat(function (d) {
-      return d;
-    })
-  );
+    .datum(motion_data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr(
+      "d",
+      d3
+        .line()
+        .x(function (d) {
+          return x(d.worldPositionX);
+        })
+        .y(function (d) {
+          return y(d.worldPositionZ);
+        })
+    );
 }
