@@ -1,30 +1,37 @@
 body {
-  font-family: "Rajdhani", sans-serif;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 #logs {
-  overflow: scroll !important;
+    overflow: scroll !important;
 }
 
-.big-stat {
-  font-weight: 700;
-  font-size: 55px;
+.stat-lg {
+    font-weight: 700;
+    font-size: 85px;
+    line-height: 30px;
+}
+
+.stat-md {
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 30px;
 }
 
 #vis-content {
-  height: 100vh;
+    height: 100vh;
 }
 
 #motion-map {
-  height: 750px;
-  width: 770px;
+    height: 750px;
+    width: 770px;
 }
 
 .navbar-brand {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 #motion-map-title {
-  padding-top: 15px;
-  padding-left: 15px;
+    padding-top: 15px;
+    padding-left: 15px;
 }
