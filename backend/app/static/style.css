@@ -1,14 +1,30 @@
+body {
+  font-family: "Rajdhani", sans-serif;
+}
+
 #logs {
   overflow: scroll !important;
 }
 
-.stat {
-  font-family: "Rajdhani", sans-serif;
+.big-stat {
   font-weight: 700;
-  font-size: 54px;
+  font-size: 55px;
+}
+
+#vis-content {
+  height: 100vh;
 }
 
 #motion-map {
   height: 750px;
   width: 770px;
+}
+
+.navbar-brand {
+  font-weight: 700;
+}
+
+#motion-map-title {
+  padding-top: 15px;
+  padding-left: 15px;
 }

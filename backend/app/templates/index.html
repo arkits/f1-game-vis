@@ -43,57 +43,64 @@
          </div>
       </nav>
       <div class="content-wrapper">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-4">
-                  <div class="card">
-                     <center>
-                        <div class="container-fluid">
-                           <div class="row">
-                              <div class="col-sm">
-                                 <span class="align-middle stat" id="speed"></span>
-                                 <p>Speed</p>
-                              </div>
-                              <div class="col-sm">
-                                 <span class="align-middle stat" id="engineRPM"></span>
-                                 <p>RPM</p>
-                              </div>
-                              <div class="col-sm">
-                                 <span class="align-middle stat" id="gear"></span>
-                                 <p>Gear</p>
-                              </div>
-                           </div>
-                           <div class="row">
-                              <div class="progress-group">
-                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" id="revLightsPercent" aria-valuemin="0"
-                                       aria-valuemax="100">
-                                    </div>
+         <div id="vis-content">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-4">
+                     <div class="card">
+                        <center>
+                           <div class="container-fluid">
+                              <div class="row">
+                                 <div class="col-sm">
+                                    <span class="align-middle big-stat" id="speed"></span>
+                                    <p class="font-weight-bold">Speed</p>
                                  </div>
-                                 <span class="progress-group-label">REV</span>
+                                 <div class="col-sm">
+                                    <span class="align-middle big-stat" id="engineRPM"></span>
+                                    <p class="font-weight-bold">RPM</p>
+                                 </div>
+                                 <div class="col-sm">
+                                    <span class="align-middle big-stat" id="gear"></span>
+                                    <p class="font-weight-bold">Gear</p>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="progress-group">
+                                    <div class="progress">
+                                       <div class="progress-bar" role="progressbar" id="revLightsPercent"
+                                          aria-valuemin="0" aria-valuemax="100">
+                                       </div>
+                                    </div>
+                                    <span class="progress-group-label font-weight-bold">REV</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                     </center>
+                        </center>
+                     </div>
                   </div>
-               </div>
-               <div class="col-8">
-                  <div class="card p-0">
-                     <center>
-                        <div class="container-fluid">
-                           <div id="motion-map-container">
+                  <div class="col-8">
+                     <div class="card p-0">
+                        <h2 id="motion-map-title" class="card-title font-weight-bold">
+                           Map
+                        </h2>
+                        <center>
+                           <div class="container-fluid">
+                              <div id="motion-map-container">
+                              </div>
                            </div>
-                        </div>
-                     </center>
+                        </center>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
-         <div class="card h-half">
-            <h2 class="card-title">
-               Logs
-            </h2>
-            <div class="h-full text-monospace" id="logs">
+         <div id="vis-logs">
+            <div class="card h-half">
+               <h2 class="card-title">
+                  Logs
+               </h2>
+               <div class="h-full text-monospace" id="logs">
+               </div>
             </div>
          </div>
       </div>

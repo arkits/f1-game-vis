@@ -124,4 +124,19 @@ function draw_motion_chart() {
           return y(d.worldPositionZ);
         })
     );
+
+  svg
+    .selectAll("dot")
+    .data([motion_data[motion_data.length - 1]])
+    .enter()
+    .append("circle")
+    .attr("r", 5)
+    .attr("cx", function (d) {
+      return x(d.worldPositionX);
+    })
+    .attr("cy", function (d) {
+      return y(d.worldPositionZ);
+    })
+    .attr("stroke", "#32CD32")
+    .attr("stroke-width", 1.5);
 }
