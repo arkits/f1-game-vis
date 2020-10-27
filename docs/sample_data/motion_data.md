@@ -1,23 +1,17 @@
+# `motion_data`
+
+-   `motion_data` is one of the Socket IO events published by the Backend.
+-   This model encapsulates positional information of the player and NPCs.
+-   The object is a JSON representation of `CarMotionData_V1` - https://gitlab.com/gparent/f1-2020-telemetry/-/blob/master/f1_2020_telemetry/packets.py#L135
+
+## Sample Model
+
+```json
 {
     "player_motion": {
         "worldPositionX": -250.6400909423828,
         "worldPositionY": 2.6114730834960938,
-        "worldPositionZ": 147.947998046875,
-        "worldVelocityX": 6.351235866546631,
-        "worldVelocityY": -0.08400729298591614,
-        "worldVelocityZ": 39.278663635253906,
-        "worldForwardDirX": 5322,
-        "worldForwardDirY": -63,
-        "worldForwardDirZ": 32331,
-        "worldRightDirX": -32312,
-        "worldRightDirY": 1132,
-        "worldRightDirZ": 5321,
-        "gForceLateral": 0.3718780279159546,
-        "gForceLongitudinal": 1.500106692314148,
-        "gForceVertical": 0.04530491307377815,
-        "yaw": 0.16325560212135315,
-        "pitch": 0.034424543380737305,
-        "roll": -0.03456669673323631
+        "worldPositionZ": 147.947998046875
     },
     "npc_motion": [
         {
@@ -117,3 +111,4 @@
         }
     ]
 }
+```
