@@ -35,3 +35,7 @@ body {
     padding-top: 15px;
     padding-left: 15px;
 }
+
+.mode-badge {
+    margin-right: 10px;
+}

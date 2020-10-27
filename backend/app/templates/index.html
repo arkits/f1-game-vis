@@ -21,27 +21,8 @@
 
 <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true"
    data-set-preferred-mode-onload="true">
-   <div class="page-wrapper with-navbar">
+   <div class="page-wrapper">
       <div class="sticky-alerts"></div>
-      <nav class="navbar">
-         <a href="#" class="navbar-brand">
-            Viz
-         </a>
-         <div class="d-none d-md-flex ml-auto">
-            <span class="navbar-text ml-5">
-               <a href="#" class="badge-group" role="group" aria-label="...">
-                  <span class="badge bg-dark text-white">async_mode</span>
-                  <span class="badge badge-primary">{{ async_mode }}</span>
-               </a>
-               <a href="#" class="badge-group" role="group" aria-label="...">
-                  <span class="badge bg-dark text-white">ping/pong</span>
-                  <span class="badge badge-success">
-                     <span id="ping-pong"></span>ms
-                  </span>
-               </a>
-            </span>
-         </div>
-      </nav>
       <div class="content-wrapper">
          <div id="vis-content">
             <div class="container-fluid">
@@ -52,6 +33,10 @@
                            <!-- Speed stats row -->
                            <center>
                               <div class="row">
+                                 <div class="col-sm">
+                                    <span class="stat-lg" id="position">0</span><br />
+                                    <span>Position</span>
+                                 </div>
                                  <div class="col-sm">
                                     <span class="stat-lg" id="speed">0</span><br />
                                     <span>Speed</span>
@@ -82,8 +67,11 @@
                            <!-- Status indicators row -->
                            <div class="d-flex justify-content-center">
                               <div class="row">
-                                 <span class="badge-group" role="group" aria-label="DRS">
+                                 <span class="badge-group mode-badge" role="group" aria-label="DRS">
                                     <span id="drs-badge" class="badge">DRS</span>
+                                 </span>
+                                 <span class="badge-group mode-badge" role="group" aria-label="ERS">
+                                    <span id="ers-badge" class="badge">ERS</span>
                                  </span>
                               </div>
                            </div>
@@ -115,6 +103,27 @@
                                  <span class="progress-group-label">BRKE</span>
                               </div>
                            </div>
+                           <br /><br />
+                           <!-- Lap time row -->
+                           <center>
+                              <div class="row">
+                                 <div class="col-sm">
+                                    <span class="stat-lg" id="current-lap-time">0</span><br />
+                                    <span>Current Lap Time</span>
+                                 </div>
+                              </div>
+                              <br />
+                              <div class="row">
+                                 <div class="col-sm">
+                                    <span class="stat-md" id="last-lap-time">0</span><br />
+                                    <span>Last Lap</span>
+                                 </div>
+                                 <div class="col-sm">
+                                    <span class="stat-md" id="best-lap-time">0</span><br />
+                                    <span>Best Lap</span>
+                                 </div>
+                              </div>
+                           </center>
                         </div>
                      </div>
                   </div>
@@ -136,9 +145,19 @@
          </div>
          <div id="vis-logs">
             <div class="card h-half">
-               <h2 class="card-title">
-                  Logs
+               <h2 class="card-title font-weight-bold">
+                  Viz Logs
                </h2>
+               <span class="badge-group" role="group">
+                  <span class="badge bg-dark text-white">async_mode</span>
+                  <span class="badge badge-primary">{{ async_mode }}</span>
+               </span>
+               <span class="badge-group" role="group">
+                  <span class="badge bg-dark text-white">ping/pong</span>
+                  <span class="badge badge-success">
+                     <span id="ping-pong"></span>ms
+                  </span>
+               </span>
                <div class="h-full text-monospace" id="logs">
                </div>
             </div>

@@ -82,6 +82,33 @@ function setup_sio() {
         }
     });
 
+    socket.on('player_car_status', function (msg) {
+        if ('ersDeployMode' in msg) {
+            if (msg.ersDeployMode === 0) {
+                $('#ers-badge').attr('class', 'badge');
+            } else if (msg.ersDeployMode === 1) {
+                $('#ers-badge').attr('class', 'badge badge-success');
+            } else {
+                $('#ers-badge').attr('class', 'badge badge-secondary');
+            }
+        }
+    });
+
+    socket.on('player_lap_data', function (msg) {
+        if ('currentLapTime' in msg) {
+            $('#current-lap-time').text(msg.currentLapTime.toFixed(3));
+        }
+        if ('carPosition' in msg) {
+            $('#position').text(msg.carPosition);
+        }
+        if ('bestLapTime' in msg) {
+            $('#best-lap-time').text(msg.bestLapTime.toFixed(3));
+        }
+        if ('lastLapTime' in msg) {
+            $('#last-lap-time').text(msg.lastLapTime.toFixed(3));
+        }
+    });
+
     // Calculate and display latency
     socket.on('test_pong', function () {
         var latency = new Date().getTime() - start_time;
