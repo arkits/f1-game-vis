@@ -50,9 +50,29 @@ function setup_sio() {
             $('#gear').text(msg.gear);
         }
 
+        if ('drs' in msg) {
+            if (msg.drs === 0) {
+                $('#drs-badge').attr('class', 'badge');
+            } else {
+                $('#drs-badge').attr('class', 'badge badge-success');
+            }
+        }
+
         if ('revLightsPercent' in msg) {
-            var value = msg.revLightsPercent + '%';
-            $('#revLightsPercent').css('width', value);
+            $('#revLightsPercent').css('width', msg.revLightsPercent + '%');
+        }
+
+        if ('throttle' in msg) {
+            $('#throttle-progress').css('width', msg.throttle * 100 + '%');
+        }
+
+        if ('brake' in msg) {
+            $('#brake-progress').css('width', msg.brake * 100 + '%');
+        }
+
+        if ('steer' in msg) {
+            var steer_value = ((msg.steer + 1) / 2) * 100;
+            $('#steer-progress').css('width', steer_value + '%');
         }
     });
 

@@ -49,32 +49,70 @@
                   <div class="col-4">
                      <div class="card">
                         <div class="container-fluid">
+                           <!-- Speed stats row -->
                            <center>
                               <div class="row">
                                  <div class="col-sm">
                                     <span class="stat-lg" id="speed">0</span><br />
-                                    <span class="font-weight-bold">Speed</span>
+                                    <span>Speed</span>
                                  </div>
                                  <div class="col-sm">
                                     <span class="stat-lg" id="engineRPM">0</span><br />
-                                    <span class="font-weight-bold">RPM</span>
+                                    <span>RPM</span>
                                  </div>
                               </div>
                            </center>
                            <br />
+                           <!-- Rev Lights row -->
                            <div class="row">
                               <div class="progress-group">
                                  <div class="progress">
-                                    <div class="progress-bar" role="progressbar" id="revLightsPercent" aria-valuemin="0"
+                                    <div class="progress-bar bg-danger" role="progressbar" id="revLightsPercent"
+                                       aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                 </div>
+                                 <span class="progress-group-label">
+                                    <div class="col-sm">
+                                       <span class="stat-md" id="gear">0</span><br />
+                                       <span>Gear</span>
+                                    </div>
+                                 </span>
+                              </div>
+                           </div>
+                           <!-- Status indicators row -->
+                           <div class="d-flex justify-content-center">
+                              <div class="row">
+                                 <span class="badge-group" role="group" aria-label="DRS">
+                                    <span id="drs-badge" class="badge">DRS</span>
+                                 </span>
+                              </div>
+                           </div>
+                           <br />
+                           <!-- Control group -->
+                           <div class="row">
+                              <div class="progress-group">
+                                 <div class="progress">
+                                    <div id="steer-progress" class="progress-bar" role="progressbar" aria-valuemin="0"
                                        aria-valuemax="100">
                                     </div>
                                  </div>
-                                 <span class="progress-group-label font-weight-bold">
-                                    <div class="col-sm">
-                                       <span class="stat-md" id="gear">0</span><br />
-                                       <span class="font-weight-bold ">Gear</span>
+                                 <span class="progress-group-label">STER</span>
+                              </div>
+                              <div class="progress-group">
+                                 <div class="progress">
+                                    <div id="throttle-progress" class="progress-bar bg-success" role="progressbar"
+                                       aria-valuemin="0" aria-valuemax="100">
                                     </div>
-                                 </span>
+                                 </div>
+                                 <span class="progress-group-label">TRTL</span>
+                              </div>
+                              <div class="progress-group">
+                                 <div class="progress">
+                                    <div id="brake-progress" class="progress-bar bg-secondary" role="progressbar"
+                                       aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                 </div>
+                                 <span class="progress-group-label">BRKE</span>
                               </div>
                            </div>
                         </div>
