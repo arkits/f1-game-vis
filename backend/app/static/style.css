@@ -39,3 +39,12 @@ body {
 .mode-badge {
     margin-right: 10px;
 }
+
+.tyre-status {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: green;
+    text-align: center;
+    margin: 10px;
+    font-weight: 700;
+}

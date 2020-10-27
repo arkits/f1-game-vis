@@ -80,6 +80,13 @@ function setup_sio() {
             var steer_value = ((msg.steer + 1) / 2) * 100;
             $('#steer-progress').css('width', steer_value + '%');
         }
+
+        if ('tyresSurfaceTemperature' in msg) {
+            var temp_prefix = '°';
+            msg.tyresSurfaceTemperature.forEach((temp, i) => {
+                $(`#tyre-temp-${i}`).text(temp + temp_prefix);
+            });
+        }
     });
 
     socket.on('player_car_status', function (msg) {
@@ -91,6 +98,18 @@ function setup_sio() {
             } else {
                 $('#ers-badge').attr('class', 'badge badge-secondary');
             }
+        }
+
+        if ('tyresDamage' in msg) {
+            msg.tyresDamage.forEach((wear, i) => {
+                if (wear <= 50) {
+                    $(`#tyre-status-${i}`).css('background-color', 'green');
+                } else if (50 < wear && wear <= 70) {
+                    $(`#tyre-status-${i}`).css('background-color', 'yellow');
+                } else {
+                    $(`#tyre-status-${i}`).css('background-color', 'red');
+                }
+            });
         }
     });
 
