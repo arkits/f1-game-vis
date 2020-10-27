@@ -1,4 +1,5 @@
 let motion_data = [];
+let npc_motion = [];
 let motion_map_viewport_size = 600;
 
 $(document).ready(function () {
@@ -24,7 +25,12 @@ function setup_sio() {
     });
 
     socket.on('motion_data', function (msg) {
+        // Update player_motion_data
         motion_data.push(msg);
+
+        // Update npc_motion
+        npc_motion = msg.npc_motion;
+
         draw_motion_chart();
     });
 
@@ -160,7 +166,7 @@ function draw_motion_chart() {
 
     // Add the potion markers for the NPCs
     svg.selectAll('npc-dot')
-        .data(motion_data[motion_data.length - 1].npc_motion)
+        .data(npc_motion)
         .enter()
         .append('circle')
         .attr('r', 5)

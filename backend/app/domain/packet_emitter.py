@@ -57,15 +57,7 @@ def parse_packet(unpacked_packet: f1_packets.PackedLittleEndianStructure):
     # Handle car_motion_data
     if type(unpacked_packet) is f1_packets.PacketMotionData_V1:
 
-        motion_data = {}
-
-        motion_data["player_motion"] = parse_packet_to_dict(
-            unpacked_packet.carMotionData[player_car_idx]
-        )
-
-        motion_data["npc_motion"] = parse_ncp_motion(
-            unpacked_packet.carMotionData, player_car_idx
-        )
+        motion_data = parse_motion_data(unpacked_packet.carMotionData, player_car_idx)
 
         return motion_data, "motion_data"
 
@@ -99,25 +91,29 @@ def parse_packet_to_dict(packet: f1_packets.PackedLittleEndianStructure):
     return parsed_packet
 
 
-def parse_ncp_motion(car_motion_data_v1: f1_packets.CarMotionData_V1, player_car_idx):
+def parse_motion_data(car_motion_data_v1: f1_packets.CarMotionData_V1, player_car_idx):
+
+    motion_data = {}
 
     npc_motion = []
 
     idx = 0
 
-    for car_motion in car_motion_data_v1:
+    for car_motion_data in car_motion_data_v1:
 
-        # We only care about the motion data for the NPCs
+        parsed_motion_data = {}
+
+        parsed_motion_data["worldPositionX"] = car_motion_data.worldPositionX
+        parsed_motion_data["worldPositionY"] = car_motion_data.worldPositionY
+        parsed_motion_data["worldPositionZ"] = car_motion_data.worldPositionZ
+
         if idx == player_car_idx:
-            continue
-
-        motion_data = {}
-        motion_data["worldPositionX"] = car_motion.worldPositionX
-        motion_data["worldPositionY"] = car_motion.worldPositionY
-        motion_data["worldPositionZ"] = car_motion.worldPositionZ
-
-        npc_motion.append(motion_data)
+            motion_data["player_motion"] = parsed_motion_data
+        else:
+            npc_motion.append(parsed_motion_data)
 
         idx += 1
 
-    return npc_motion
+    motion_data["npc_motion"] = npc_motion
+
+    return motion_data
