@@ -54,6 +54,24 @@ def parse_packet(unpacked_packet: f1_packets.PackedLittleEndianStructure):
 
         return player_car_telemetry, "player_car_telemetry"
 
+    # Handle player_car_status
+    if type(unpacked_packet) is f1_packets.PacketCarStatusData_V1:
+
+        player_car_status = parse_packet_to_dict(
+            unpacked_packet.carStatusData[player_car_idx]
+        )
+
+        return player_car_status, "player_car_status"
+
+    # Handle player_lap_data
+    if type(unpacked_packet) is f1_packets.PacketLapData_V1:
+
+        player_lap_data = parse_packet_to_dict(
+            unpacked_packet.lapData[player_car_idx]
+        )
+
+        return player_lap_data, "player_lap_data"
+
     # Handle car_motion_data
     if type(unpacked_packet) is f1_packets.PacketMotionData_V1:
 
